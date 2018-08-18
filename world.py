@@ -6,7 +6,7 @@ class World():
         self.all_Sprite=sprite_list
         self.actual_map=visualmap.Map(self.all_Sprite,screen)
 
-    def update(self)
+    def update(self):
         self.all_Sprite.update()
 
 
