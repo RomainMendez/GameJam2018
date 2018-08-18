@@ -15,6 +15,9 @@ from staticScreens import MapImage
 from navalObject import Player
 from ship import Ship
 
+#for land tile objects
+from landObject import LandObject, StartingHarbour
+
 #Method called needed by pygame
 pygame.init()
 pygame.key.set_repeat()
@@ -42,6 +45,8 @@ tick = 6000
 count_towards_new_ennemy = 5940
 
 world = World([MapImage(), player], screen)
+
+world.add_sprite(StartingHarbour(500,500,25,1))
 
 
 menu = True
@@ -84,7 +89,13 @@ while not done:
         homescreen_group.draw(screen)
         pygame.display.flip()
     else:
+
+
+
         #Here starts the logic of the game
+
+        
+
         count_towards_new_ennemy += 1
         if(count_towards_new_ennemy == tick):
             count_towards_new_ennemy = 0
