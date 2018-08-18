@@ -26,7 +26,6 @@ class NavalObject(worldObject.WorldObject):
     def set_speed_x(self, value):
         self.speed_x = value
     def set_speed_y(self, value):
-        print("reset y axis")
         self.speed_y = value
 
     def object_advance(self):
