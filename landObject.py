@@ -62,14 +62,14 @@ class EndingHarbour(LandObject):
 
     def update(self):
         super().update()
-        if self.occupied == true :
-            unload()
+        if self.occupied == True :
+            self.unload()
 
     def unload(self):
-        to_unload = player.nb_pop
-        player.nb_pop = 0
-        player.money += to_unload*self.money
-        print(player.money)
+        to_unload = self.player.nb_pop
+        self.player.nb_pop = 0
+        self.player.money += to_unload*self.money
+        print(self.player.money)
 
 
 
