@@ -9,13 +9,28 @@ class LandObject(worldObject.WorldObject):
         self.passable=passable
 
 class Coast(LandObject):
+    '''don'''
     def __init__(self,x,y):
-        super().__init__(self,x,y,False)
+        super().__init__(x,y,False)
 
-class BonusZone(LandObject):
-    def __init__(self,x,y,bonusType,timer):
+class BuyZone(LandObject):
+    def __init__(self,x,y,buyType,timer):
         super().__init__(x,y,True)
-        self.bonusType=bonusType
+        self.buyType=buyType
 
+class Harbour(LandObject):
+    def __init__(self,x,y,maxPop,popGrowth):
+        super().__init__(x,y,True)
+        self.maxPop=maxPop
+        self.popGrowth=popGrowth
+        self.pop=0
+    def popGrowth():
+        if self.pop<self.maxPop:
+            pop+=self.popGrowth
+    def update():
+        self.popGrowth()
         
+
+
+
 
