@@ -4,10 +4,10 @@ class Map():
     def __init__(self, sprite_list, s):
         self.all_list = sprite_list
         self.screen = s
+        self.playlist = pygame.sprite.Group()
+        for sprite in self.all_list:
+            self.playlist.add(sprite)
         print("Map initialized")
 
     def show(self):
-        playlist = pygame.sprite.Group()
-        for sprite in self.all_list:
-            playlist.add(sprite)
-        playlist.draw(self.screen)
+        self.playlist.draw(self.screen)
