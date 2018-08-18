@@ -48,13 +48,16 @@ class NavalObject(worldObject.WorldObject):
         self.ship = ship
 
 class Player(NavalObject):
-    def __init__(self, ship, speed_x, speed_y, x, y, nb_pop):
+    def __init__(self, ship, speed_x, speed_y, x, y, nb_pop, money):
         super().__init__(ship, speed_x, speed_y, x, y)
 
         #Changing the size of the player
         self.image = pygame.image.load("ressources/bluesquare.png")
         self.image = pygame.transform.scale(self.image, (16, 16))
         self.rect = self.image.get_rect()
+
+        #Counting the money
+        self.money = 0
 
         self.nb_pop = nb_pop
         self.left = False
