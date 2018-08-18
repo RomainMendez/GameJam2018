@@ -65,6 +65,11 @@ class EndingHarbour(LandObject):
         if self.occupied == true :
             unload()
 
+    def unload(self):
+        to_unload = player.nb_pop
+        player.nb_pop = 0
+        player.money += to_unload*self.money
+        print(player.money)
 
 
 
