@@ -33,13 +33,15 @@ class NavalObject(worldObject.WorldObject):
         self.ship = ship
 
 class Player(NavalObject):
-    def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants):
+    def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants, SCREEN_HEIGHT, SCREEN_WIDTH):
         super().__init__(ship, speed_x, speed_y, x, y)
         self.nb_migrants = nb_migrants
         self.left = False
         self.right = False
         self.top = False
         self.bottom = False
+        self.SCREEN_HEIGHT = SCREEN_HEIGHT
+        self.SCREEN_WIDTH = SCREEN_WIDTH
 
     #Method that returs the number of migrants that were kicked from the ship from the number given
     def add_migrant(self, n):
@@ -75,6 +77,18 @@ class Player(NavalObject):
                     final_speed = - final_speed
                 self.set_speed_y(final_speed)
         self.rect.x += self.speed_x
+        if self.rect.x < 0:
+            self.rect.x = 0
+            self.set_speed_x(0)
+        if self.rect.x > self.SCREEN_WIDTH - self.rect.width:
+            self.rect.x = self.SCREEN_WIDTH - self.rect.width
+            self.set_speed_x(0)
         self.rect.y += self.speed_y
+        if self.rect.y < 0:
+            self.rect.y = 0
+            self.set_speed_y(0)
+        if self.rect.y > self.SCREEN_HEIGHT - self.rect.height:
+            self.rect.y = self.SCREEN_HEIGHT - self.rect.height
+            self.set_speed_y(0)
 
     

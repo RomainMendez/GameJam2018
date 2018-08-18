@@ -30,7 +30,8 @@ homescreen_group = pygame.sprite.Group()
 homescreen_group.add(homescreen)
 
 ### Setting up all entities for level
-player = Player(Ship(max_speed=2, cargo=3, acceleration=0.4, decceleration=1), speed_x=0, speed_y=0, x=10, y=360, nb_migrants=0)
+player = Player(Ship(max_speed=2, cargo=3, acceleration=0.4, decceleration=1), speed_x=0, speed_y=0, x=10, y=360, 
+    nb_migrants=0, SCREEN_WIDTH=SCREEN_WIDTH, SCREEN_HEIGHT=SCREEN_HEIGHT)
 
 world = World([MapImage(), player], screen)
 
