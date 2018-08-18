@@ -80,7 +80,7 @@ class Player(NavalObject):
             self.add_speed_y(self.ship.acceleration)
         if self.right:
             self.add_speed_x(self.ship.acceleration)
-        if not self.top and not self.right and not self.left and not self.bottom:
+        if not self.right and not self.left :
             if abs(self.speed_x) < self.ship.decceleration:
                 self.set_speed_x(0)
             else:
@@ -88,6 +88,7 @@ class Player(NavalObject):
                 if self.speed_x < 0:
                     final_speed = - final_speed
                 self.set_speed_x(final_speed)
+        if not self.top and not self.bottom:
             if abs(self.speed_y) < self.ship.decceleration:
                 self.set_speed_y(0)
             else:
