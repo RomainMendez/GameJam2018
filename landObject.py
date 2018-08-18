@@ -46,7 +46,8 @@ class StartingHarbour(LandObject):
     def update(self):
         super().update()
         self.counter+=1
-        if self.counter % 10==0:
+        if self.counter == 300:
+            self.counter = 0
             self.popGrowing()
             print(self.pop)
         if self.occupied:
