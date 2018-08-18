@@ -62,6 +62,10 @@ class EndingHarbour(LandObject):
 
     def update(self):
         super().update()
+        if self.occupied == true :
+            unload()
+
+
 
 
 
