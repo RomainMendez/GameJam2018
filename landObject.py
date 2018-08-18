@@ -10,10 +10,8 @@ class LandObject(worldObject.WorldObject):
         self.occupied=False
 
     def update(self):
-        print('works11')
         self.occupied = True
         if pygame.sprite.collide_rect(self, self.player):
-            print('works')
             self.occupied=True
         else:
             self.occupied=False
@@ -52,7 +50,7 @@ class StartingHarbour(LandObject):
             self.popGrowing()
             print(self.pop)
         if self.occupied:
-            self.pop=self.player.add_pop()
+            self.pop=self.player.add_pop(self.pop)
         
 class EndingHarbour(LandObject):
     def __init__(self,x,y,money,player):
