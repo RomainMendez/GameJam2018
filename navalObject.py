@@ -30,11 +30,11 @@ class NavalObject(worldObject.WorldObject):
 
     def object_advance(self):
         self.rect.x += self.speed_x
-        if self.rect.x < 0:
-            self.rect.x = 0
+        if self.rect.x < Constants.COAST_OFFSET():
+            self.rect.x = Constants.COAST_OFFSET()
             self.set_speed_x(0)
-        if self.rect.x > Constants.SCREEN_WIDTH() - self.rect.width:
-            self.rect.x = Constants.SCREEN_WIDTH() - self.rect.width
+        if self.rect.x > Constants.SCREEN_WIDTH() - self.rect.width - Constants.COAST_OFFSET():
+            self.rect.x = Constants.SCREEN_WIDTH() - self.rect.width - Constants.COAST_OFFSET()
             self.set_speed_x(0)
         self.rect.y += self.speed_y
         if self.rect.y < 0:
@@ -96,5 +96,6 @@ class Player(NavalObject):
                     final_speed = - final_speed
                 self.set_speed_y(final_speed)
         self.object_advance()
+        #print(str(self.rect.x) + ' and ' + str(self.rect.y))
 
     
