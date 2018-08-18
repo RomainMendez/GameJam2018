@@ -9,7 +9,7 @@ class LandObject(worldObject.WorldObject):
         self.passable=passable
 
 class Coast(LandObject):
-    '''don'''
+    '''innutile'''
     def __init__(self,x,y):
         super().__init__(x,y,False)
 
@@ -18,18 +18,32 @@ class BuyZone(LandObject):
         super().__init__(x,y,True)
         self.buyType=buyType
 
-class Harbour(LandObject):
+class StartingHarbour(LandObject):
     def __init__(self,x,y,maxPop,popGrowth):
         super().__init__(x,y,True)
         self.maxPop=maxPop
         self.popGrowth=popGrowth
         self.pop=0
-    def popGrowth():
+        self.image = pygame.image.load("ressources/greensquare.png")
+
+    def popGrowing(self):
         if self.pop<self.maxPop:
-            pop+=self.popGrowth
-    def update():
+            self.pop+=self.popGrowth
+
+    def popEmbarks(self):
+        self.pop=0
+
+    def popeEmbarks(self):
+        self.pop-=1
+
+    def update(self):
         self.popGrowth()
         
+class EndingHarbour(LandObject):
+    def __init__(self,x,y,money_value):
+        super().__init__(x,y,True)
+        self.image = pygame.image.load("ressources/purplesquare.png")
+
 
 
 
