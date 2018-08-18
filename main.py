@@ -22,6 +22,13 @@ from landObject import LandObject, StartingHarbour, EndingHarbour
 pygame.init()
 pygame.key.set_repeat()
 
+pygame.font.init()
+
+
+                   # if you want to use this module.
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
+textsurface = myfont.render('Some Text', False, (0, 0, 0)) #rgba colors
+
 #Setting up window size
 
 screen = pygame.display.set_mode([Constants.SCREEN_WIDTH(), Constants.SCREEN_HEIGHT()])
@@ -46,7 +53,10 @@ count_towards_new_ennemy = 5940
 
 world = World([MapImage(), player], screen)
 
-world.add_sprite(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player))
+starting_harbour1 = StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player)
+all_starting_harbours = [starting_harbour1]
+
+world.add_sprite(starting_harbour1)
 world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
 
 
@@ -90,7 +100,7 @@ while not done:
         homescreen_group.draw(screen)
         pygame.display.flip()
     else:
-
+        
 
 
         #Here starts the logic of the game
@@ -109,6 +119,15 @@ while not done:
         world.update()
         world.actual_map.show()
 
+        #Showing important informations
+
+        #render amount of migrants available
+        for harbour in all_starting_harbours:
+            nb_avaiable = myfont.render(str(harbour.pop), False, (0, 0, 0))
+            screen.blit(nb_avaiable,(harbour.rect.x, harbour.rect.y - 50))
+        
+        textsurface = myfont.render(str(player.money), False, (0, 0, 0)) #Shows player money
+        screen.blit(textsurface,(0,0)) #coordinates x, y
         pygame.display.flip()
 
     #Capping fps
