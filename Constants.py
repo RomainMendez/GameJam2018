@@ -17,10 +17,10 @@ def SCREEN_WIDTH():
     return 1280
 
 def BASIC_ENNEMY_DETECTION_RANGE():
-    return 40*40
+    return 100*100
 
 def BASIC_ENNEMY_LOSING_RANGE():
-    return 40*40
+    return 200*200
 
 def TWO():
     return 2
