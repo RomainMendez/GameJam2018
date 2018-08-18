@@ -38,7 +38,7 @@ homescreen_group.add(homescreen)
 
 ### Setting up all entities for level
 player = Player(Ship(max_speed=5, cargo=3, acceleration=0.4, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
-    nb_migrants=0)
+    nb_pop=0)
 
 #Data for generating ennemies
 tick = 6000
