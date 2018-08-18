@@ -1,7 +1,9 @@
-print("welcome to game maggle")
-
 #Useful imports
 import pygame
+
+#Imports for the game logic
+from world import World
+from staticScreens import MapImage
 
 #Method called needed by pygame
 pygame.init()
@@ -16,8 +18,9 @@ screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 #Setting up clock
 clock = pygame.time.Clock()
 
-from homeScreen import HomeScreen
+from staticScreens import HomeScreen
 #Loading homescreen
+
 homescreen = HomeScreen()
 homescreen_group = pygame.sprite.Group()
 homescreen_group.add(homescreen)
@@ -40,9 +43,13 @@ while not done:
         homescreen_group.draw(screen)
         pygame.display.flip()
     else:
-        
+        #Here starts the logic of the game
+        world = World([MapImage()], screen)
+
+        world.actual_map.show()
+
         pygame.display.flip()
         print("Displaying map")
 
     #Capping fps
-    clock.tick(1)
+    clock.tick(60)
