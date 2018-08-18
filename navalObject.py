@@ -40,15 +40,15 @@ class NavalObject(worldObject.WorldObject):
         if self.rect.y < 0:
             self.rect.y = 0
             self.set_speed_y(0)
-        if self.rect.y > Constants.SCREEN_HEIGHT() - self.rect.height:
-            self.rect.y = Constants.SCREEN_HEIGHT() - self.rect.height
+        if self.rect.y > Constants.GAME_AREA_HEIGHT() - self.rect.height:
+            self.rect.y = Constants.GAME_AREA_HEIGHT() - self.rect.height
             self.set_speed_y(0)
 
     def set_ship(self, ship):
         self.ship = ship
 
 class Player(NavalObject):
-    def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants, SCREEN_HEIGHT, SCREEN_WIDTH):
+    def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants):
         super().__init__(ship, speed_x, speed_y, x, y)
 
         #Changing the size of the player
@@ -61,8 +61,6 @@ class Player(NavalObject):
         self.right = False
         self.top = False
         self.bottom = False
-        self.SCREEN_HEIGHT = SCREEN_HEIGHT
-        self.SCREEN_WIDTH = SCREEN_WIDTH
 
     #Method that returs the number of migrants that were kicked from the ship from the number given
     def add_migrant(self, n):

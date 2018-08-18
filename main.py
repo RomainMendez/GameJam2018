@@ -1,6 +1,8 @@
 #Useful imports
 import pygame
 
+import Constants
+
 #Imports for the game logic
 from world import World
 from staticScreens import MapImage
@@ -14,10 +16,8 @@ pygame.init()
 pygame.key.set_repeat()
 
 #Setting up window size
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
 
-screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+screen = pygame.display.set_mode([Constants.SCREEN_WIDTH(), Constants.SCREEN_HEIGHT()])
 
 #Setting up clock
 clock = pygame.time.Clock()
@@ -31,7 +31,7 @@ homescreen_group.add(homescreen)
 
 ### Setting up all entities for level
 player = Player(Ship(max_speed=2, cargo=3, acceleration=0.4, decceleration=1), speed_x=0, speed_y=0, x=10, y=360, 
-    nb_migrants=0, SCREEN_WIDTH=SCREEN_WIDTH, SCREEN_HEIGHT=SCREEN_HEIGHT)
+    nb_migrants=0)
 
 world = World([MapImage(), player], screen)
 
