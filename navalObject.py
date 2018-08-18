@@ -1,6 +1,7 @@
 import worldObject
 from ship import Ship
 import pygame
+import Constants
     
 def capspeed(speed, value, value2):
     speed += value
@@ -27,7 +28,21 @@ class NavalObject(worldObject.WorldObject):
     def set_speed_y(self, value):
         self.speed_y = capspeed(self.speed_y, value, value)
 
-
+    def object_advance(self):
+        self.rect.x += self.speed_x
+        if self.rect.x < 0:
+            self.rect.x = 0
+            self.set_speed_x(0)
+        if self.rect.x > Constants.SCREEN_WIDTH() - self.rect.width:
+            self.rect.x = Constants.SCREEN_WIDTH() - self.rect.width
+            self.set_speed_x(0)
+        self.rect.y += self.speed_y
+        if self.rect.y < 0:
+            self.rect.y = 0
+            self.set_speed_y(0)
+        if self.rect.y > Constants.SCREEN_HEIGHT() - self.rect.height:
+            self.rect.y = Constants.SCREEN_HEIGHT() - self.rect.height
+            self.set_speed_y(0)
 
     def set_ship(self, ship):
         self.ship = ship
@@ -35,6 +50,12 @@ class NavalObject(worldObject.WorldObject):
 class Player(NavalObject):
     def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants, SCREEN_HEIGHT, SCREEN_WIDTH):
         super().__init__(ship, speed_x, speed_y, x, y)
+
+        #Changing the size of the player
+        self.image = pygame.image.load("ressources/bluesquare.png")
+        self.image = pygame.transform.scale(self.image, (16, 16))
+        self.rect = self.image.get_rect()
+
         self.nb_migrants = nb_migrants
         self.left = False
         self.right = False
@@ -76,19 +97,6 @@ class Player(NavalObject):
                 if self.speed_y < 0:
                     final_speed = - final_speed
                 self.set_speed_y(final_speed)
-        self.rect.x += self.speed_x
-        if self.rect.x < 0:
-            self.rect.x = 0
-            self.set_speed_x(0)
-        if self.rect.x > self.SCREEN_WIDTH - self.rect.width:
-            self.rect.x = self.SCREEN_WIDTH - self.rect.width
-            self.set_speed_x(0)
-        self.rect.y += self.speed_y
-        if self.rect.y < 0:
-            self.rect.y = 0
-            self.set_speed_y(0)
-        if self.rect.y > self.SCREEN_HEIGHT - self.rect.height:
-            self.rect.y = self.SCREEN_HEIGHT - self.rect.height
-            self.set_speed_y(0)
+        self.object_advance()
 
     
