@@ -30,7 +30,7 @@ homescreen_group = pygame.sprite.Group()
 homescreen_group.add(homescreen)
 
 ### Setting up all entities for level
-player = Player(Ship(max_speed=5, cargo=3, acceleration=0.2, decceleration = 1), speed_x=0, speed_y=0, x=10, y=360, nb_migrants=0)
+player = Player(Ship(max_speed=2, cargo=3, acceleration=0.4, decceleration=1), speed_x=0, speed_y=0, x=10, y=360, nb_migrants=0)
 
 world = World([MapImage(), player], screen)
 
@@ -48,10 +48,24 @@ while not done:
                 menu = False
             if event.key == pygame.K_ESCAPE:
                 menu = True   
-            if event.key in [pygame.K_a, pygame.K_w, pygame.K_q, pygame.K_s, pygame.K_d, pygame.K_a]:
-                player.event = event.key
-            else:
-                player.event = pygame.K_SPACE
+
+            if event.key in [pygame.K_a, pygame.K_q]:
+                player.left = True
+            if event.key in [pygame.K_z, pygame.K_w]:
+                player.top = True
+            if event.key in [pygame.K_s]:
+                player.bottom = True
+            if event.key in [pygame.K_d]:
+                player.right = True
+        if event.type == pygame.KEYUP:
+            if event.key in [pygame.K_a, pygame.K_q]:
+                player.left = False
+            if event.key in [pygame.K_z, pygame.K_w]:
+                player.top = False
+            if event.key in [pygame.K_s]:
+                player.bottom = False
+            if event.key in [pygame.K_d]:
+                player.right = False
 
     if(menu):
         print("Displaying menu")

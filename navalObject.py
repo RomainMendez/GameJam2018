@@ -36,7 +36,10 @@ class Player(NavalObject):
     def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants):
         super().__init__(ship, speed_x, speed_y, x, y)
         self.nb_migrants = nb_migrants
-        self.event = pygame.K_SPACE
+        self.left = False
+        self.right = False
+        self.top = False
+        self.bottom = False
 
     #Method that returs the number of migrants that were kicked from the ship from the number given
     def add_migrant(self, n):
@@ -48,15 +51,15 @@ class Player(NavalObject):
         return kicked_out
 
     def update(self):
-        if self.event in [pygame.K_z, pygame.K_w]:
+        if self.top:
             self.add_speed_y(-self.ship.acceleration)
-        if self.event in [pygame.K_q, pygame.K_a]:
+        if self.left:
             self.add_speed_x(-self.ship.acceleration)
-        if self.event == pygame.K_s:
+        if self.bottom:
             self.add_speed_y(self.ship.acceleration)
-        if self.event == pygame.K_d:
+        if self.right:
             self.add_speed_x(self.ship.acceleration)
-        if self.event == pygame.K_SPACE:
+        if not self.top and not self.right and not self.left and not self.bottom:
             if abs(self.speed_x) < self.ship.decceleration:
                 self.set_speed_x(0)
             else:
