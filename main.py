@@ -3,6 +3,10 @@ import pygame
 
 import Constants
 
+#For random ennemies
+import random
+from basicEnnemy import BasicEnnemy
+
 #Imports for the game logic
 from world import World
 from staticScreens import MapImage
@@ -30,8 +34,12 @@ homescreen_group = pygame.sprite.Group()
 homescreen_group.add(homescreen)
 
 ### Setting up all entities for level
-player = Player(Ship(max_speed=2, cargo=3, acceleration=0.4, decceleration=1), speed_x=0, speed_y=0, x=10, y=360, 
+player = Player(Ship(max_speed=5, cargo=3, acceleration=0.4, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
     nb_migrants=0)
+
+#Data for generating ennemies
+tick = 6000
+count_towards_new_ennemy = 5940
 
 world = World([MapImage(), player], screen)
 
@@ -40,6 +48,10 @@ menu = True
 done = False
 
 while not done:
+
+    #Spawning new ennemies
+    
+
     for event in pygame.event.get():   
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -69,17 +81,23 @@ while not done:
                 player.right = False
 
     if(menu):
-        print("Displaying menu")
         homescreen_group.draw(screen)
         pygame.display.flip()
     else:
         #Here starts the logic of the game
+        count_towards_new_ennemy += 1
+        if(count_towards_new_ennemy == tick):
+            count_towards_new_ennemy = 0
+            x_coeff = random.randint(-100, 100)/100
+            y_coeff = random.randint(-100, 100)/100
+            ennemy = BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=500, y=100, x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player)
+            world.add_sprite(ennemy)
+            print("Ennemy spawned")
 
         world.update()
         world.actual_map.show()
 
         pygame.display.flip()
-        print("Displaying map")
 
     #Capping fps
     clock.tick(60)
