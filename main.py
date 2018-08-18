@@ -46,8 +46,8 @@ count_towards_new_ennemy = 5940
 
 world = World([MapImage(), player], screen)
 
-world.add_sprite(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1))
-world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3))
+world.add_sprite(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player))
+world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
 
 
 menu = True

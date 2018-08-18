@@ -63,12 +63,12 @@ class Player(NavalObject):
         self.bottom = False
 
     #Method that returs the number of migrants that were kicked from the ship from the number given
-    def add_migrant(self, n):
-        self.nb_migrants += n
+    def add_pop(self, n):
+        self.nb_pop += n
         kicked_out = 0
-        if self.nb_migrants > self.ship.cargo:
-            kicked_out = self.nb_migrants - self.ship.cargo
-            self.nb_migrants = self.ship.cargo
+        if self.nb_pop > self.ship.cargo:
+            kicked_out = self.nb_pop - self.ship.cargo
+            self.nb_pop = self.ship.cargo
         return kicked_out
 
     def update(self):
