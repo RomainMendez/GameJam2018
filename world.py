@@ -11,6 +11,11 @@ class World():
             sprite.update()
         #self.all_Sprite.update()
 
+    def add_sprite(self, s):
+        self.all_Sprite.append(s)
+        self.actual_map.all_list.append(s)
+        self.actual_map.refresh()
+
 
 
 

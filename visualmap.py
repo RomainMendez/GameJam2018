@@ -11,3 +11,9 @@ class Map():
 
     def show(self):
         self.playlist.draw(self.screen)
+
+    def refresh(self):
+        self.playlist = pygame.sprite.Group()
+        for sprite in self.all_list:
+            self.playlist.add(sprite)
+
