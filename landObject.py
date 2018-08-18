@@ -9,7 +9,8 @@ class LandObject(worldObject.WorldObject):
         self.image = pygame.image.load("ressources/bluesquare.png")
         self.occupied=False
 
-        def update():
+        def update(self):
+            print('works11')
             if pygame.collide_rect(self, player):
                 print('works')
                 self.occupied=True
