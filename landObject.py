@@ -52,7 +52,7 @@ class StartingHarbour(LandObject):
             self.popGrowing()
             print(self.pop)
         if self.occupied:
-            self.pop=player.add_pop()
+            self.pop=self.player.add_pop()
         
 class EndingHarbour(LandObject):
     def __init__(self,x,y,money,player):
