@@ -20,6 +20,7 @@ class StartingHarbour(LandObject):
         self.maxPop=maxPop
         self.popGrowth=popGrowth
         self.pop=0
+        self.counter=0
         self.image = pygame.image.load("ressources/greensquare.png")
 
     def popGrowing(self):
@@ -33,12 +34,18 @@ class StartingHarbour(LandObject):
         self.pop-=1
 
     def update(self):
-        self.popGrowing()
+        self.counter+=1
+        if self.counter % 10==0:
+            self.popGrowing()
+            print(self.pop)
         
 class EndingHarbour(LandObject):
-    def __init__(self,x,y,money_value):
+    def __init__(self,x,y,money):
         super().__init__(x,y)
+        self.money=money
         self.image = pygame.image.load("ressources/purplesquare.png")
+
+        
 
 
 

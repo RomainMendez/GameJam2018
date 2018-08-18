@@ -16,7 +16,7 @@ from navalObject import Player
 from ship import Ship
 
 #for land tile objects
-from landObject import LandObject, StartingHarbour
+from landObject import LandObject, StartingHarbour, EndingHarbour
 
 #Method called needed by pygame
 pygame.init()
@@ -46,7 +46,8 @@ count_towards_new_ennemy = 5940
 
 world = World([MapImage(), player], screen)
 
-world.add_sprite(StartingHarbour(500,500,25,1))
+world.add_sprite(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1))
+world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3))
 
 
 menu = True
