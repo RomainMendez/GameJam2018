@@ -26,6 +26,7 @@ class NavalObject(worldObject.WorldObject):
     def set_speed_x(self, value):
         self.speed_x = value
     def set_speed_y(self, value):
+        print("reset y axis")
         self.speed_y = value
 
     def object_advance(self):
@@ -93,7 +94,7 @@ class Player(NavalObject):
             if abs(self.speed_y) < self.ship.decceleration:
                 self.set_speed_y(0)
             else:
-                final_speed = abs(self.speed_x) - self.ship.decceleration
+                final_speed = abs(self.speed_y) - self.ship.decceleration
                 if self.speed_y < 0:
                     final_speed = - final_speed
                 self.set_speed_y(final_speed)
