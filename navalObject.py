@@ -1,5 +1,6 @@
 import worldObject
 from ship import Ship
+import pygame
     
 def capspeed(speed, value, value2):
     speed += value
@@ -35,3 +36,42 @@ class Player(NavalObject):
     def __init__(self, ship, speed_x, speed_y, x, y, nb_migrants):
         super().__init__(ship, speed_x, speed_y, x, y)
         self.nb_migrants = nb_migrants
+        self.event = pygame.K_SPACE
+
+    #Method that returs the number of migrants that were kicked from the ship from the number given
+    def add_migrant(self, n):
+        self.nb_migrants += n
+        kicked_out = 0
+        if self.nb_migrants > self.ship.cargo:
+            kicked_out = self.nb_migrants - self.ship.cargo
+            self.nb_migrants = self.ship.cargo
+        return kicked_out
+
+    def update(self):
+        if self.event in [pygame.K_z, pygame.K_w]:
+            self.add_speed_y(-self.ship.acceleration)
+        if self.event in [pygame.K_q, pygame.K_a]:
+            self.add_speed_x(-self.ship.acceleration)
+        if self.event == pygame.K_s:
+            self.add_speed_y(self.ship.acceleration)
+        if self.event == pygame.K_d:
+            self.add_speed_x(self.ship.acceleration)
+        if self.event == pygame.K_SPACE:
+            if abs(self.speed_x) < self.ship.decceleration:
+                self.set_speed_x(0)
+            else:
+                final_speed = abs(self.speed_x) - self.ship.decceleration
+                if self.speed_x < 0:
+                    final_speed = - final_speed
+                self.set_speed_x(final_speed)
+            if abs(self.speed_y) < self.ship.decceleration:
+                self.set_speed_y(0)
+            else:
+                final_speed = abs(self.speed_x) - self.ship.decceleration
+                if self.speed_y < 0:
+                    final_speed = - final_speed
+                self.set_speed_y(final_speed)
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+
+    
