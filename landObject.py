@@ -2,20 +2,21 @@ import pygame
 import worldObject
 import navalObject
 class LandObject(worldObject.WorldObject):
-     def __init__(self, x, y, player):
+    def __init__(self, x, y, player):
         # Call the parent's constructor
         super().__init__(x, y)
         self.player=player
         self.image = pygame.image.load("ressources/bluesquare.png")
         self.occupied=False
 
-        def update(self):
-            print('works11')
-            if pygame.collide_rect(self, player):
-                print('works')
-                self.occupied=True
-            else:
-                self.occupied=False
+    def update(self):
+        print('works11')
+        self.occupied = True
+        if pygame.sprite.collide_rect(self, self.player):
+            print('works')
+            self.occupied=True
+        else:
+            self.occupied=False
 
 
 
@@ -59,7 +60,8 @@ class EndingHarbour(LandObject):
         self.money=money
         self.image = pygame.image.load("ressources/purplesquare.png")
 
-        
+    def update(self):
+        super().update()
 
 
 
