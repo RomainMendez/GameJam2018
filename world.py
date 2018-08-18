@@ -7,7 +7,9 @@ class World():
         self.actual_map=visualmap.Map(self.all_Sprite,screen)
 
     def update(self):
-        self.all_Sprite.update()
+        for sprite in self.all_Sprite:
+            sprite.update()
+        #self.all_Sprite.update()
 
 
 
