@@ -8,7 +8,3 @@ class World():
 
     def update(self):
         self.all_Sprite.update()
-
-
-
-
