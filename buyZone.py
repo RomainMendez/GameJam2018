@@ -6,7 +6,7 @@ import landObject
 class BuySpeed(landObject.LandObject):
     def __init__(self,x,y,player):
         super().__init__(x,y,player)
-        self.image = pygame.image.load("ressources/bonuszone.png")
+        self.image = pygame.image.load("ressources/speedzone.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -25,7 +25,7 @@ class BuySpeed(landObject.LandObject):
 class BuyCargo(landObject.LandObject):
     def __init__(self,x,y,player):
         super().__init__(x,y,player)
-        self.image = pygame.image.load("ressources/bonuszone.png")
+        self.image = pygame.image.load("ressources/cargozone.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
