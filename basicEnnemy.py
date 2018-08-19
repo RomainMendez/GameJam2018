@@ -85,6 +85,7 @@ class Projectile(navalObject.NavalObject):
 
     
     def update(self):
+        self.image = pygame.transform.rotate(self.image, 45)
         if self.target != None: #checks if target exists
             if euclidian_distance(self.target.rect.x, self.target.rect.y, self.rect.x, self.rect.y) < 40:
                 self.exploded = True
