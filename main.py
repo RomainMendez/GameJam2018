@@ -175,7 +175,7 @@ while not done:
             count_towards_new_ennemy = 0
             x_coeff = random.randint(-100, 100)/100
             y_coeff = random.randint(-100, 100)/100
-            world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=500, y=100, 
+            world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=random.randint(300, 900), y=random.randint(10, 550), 
                 x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player))
 
         world.update()
