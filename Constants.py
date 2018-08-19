@@ -28,7 +28,7 @@ def TWO():
 
 
 def STARTING_COUNT():
-    return 540
+    return 40
 
 def SPAWN_RATE():
-    return 600
+    return 60

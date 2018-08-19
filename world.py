@@ -17,7 +17,11 @@ class World():
 
     def update(self):
         if self.shooted:
-            self.actual_map.add_missile(basicEnnemy.Projectile(0, 0, self.player.rect.x, self.player.rect.y, self.player, self.actual_map.ennemy_playlist))
+            if(self.player.nb_missil > 0):
+                self.actual_map.add_missile(basicEnnemy.Projectile(0, 0, self.player.rect.x, self.player.rect.y, self.player, self.actual_map.ennemy_playlist))
+                self.player.nb_missil -= 1
+            else:
+                print("no missiles !")
             self.shooted = False
         for sprite in self.actual_map.playlist:
             sprite.update()

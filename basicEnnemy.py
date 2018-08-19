@@ -22,6 +22,9 @@ class BasicEnnemy(navalObject.NavalObject):
         self.target = player
         self.chasing = False
 
+        #Search if alive
+        self.alive = True
+
         #local constants
         self.detection_range=Constants.BASIC_ENNEMY_DETECTION_RANGE()
         self.losing_range=Constants.BASIC_ENNEMY_LOSING_RANGE()
@@ -93,18 +96,28 @@ class Projectile(navalObject.NavalObject):
         elif self.speed_x > 0 and self.invert == True:
             self.invert = False
             self.image = pygame.transform.rotate(self.image, 180)
-
         if self.target != None: #checks if target exists
-            if len(pygame.sprite.spritecollide(self, self.all_ennemies, True)) !=0:
-                self.exploded = True
-            if self.rect.center[0] < self.target.rect.center[0] :
-                # Needs to accelerate on x-axis
-                self.add_speed_x(self.ship.acceleration)
+            if self.target.alive == True:
+                hits = pygame.sprite.spritecollide(self, self.all_ennemies, True)
+                if len(hits) !=0:
+                    self.exploded = True
+                
+                for hit in hits:
+                    hit.alive = False
+                if self.rect.center[0] < self.target.rect.center[0] :
+                    # Needs to accelerate on x-axis
+                    self.add_speed_x(self.ship.acceleration)
+                else:
+                    self.add_speed_x(-self.ship.acceleration)
+                if self.rect.center[1]  < self.target.rect.center[1]:
+                    # Needs to accelerate on x-axis
+                    self.add_speed_y(self.ship.acceleration)
+                else:
+                    self.add_speed_y(-self.ship.acceleration)
+                self.object_advance()
             else:
-                self.add_speed_x(-self.ship.acceleration)
-            if self.rect.center[1]  < self.target.rect.center[1]:
-                # Needs to accelerate on x-axis
-                self.add_speed_y(self.ship.acceleration)
-            else:
-                self.add_speed_y(-self.ship.acceleration)
-            self.object_advance()
+                self.target = closest_ennemy(self.player, self.all_ennemies)
+                print(self.target)
+        else:
+            self.target = closest_ennemy(self.player, self.all_ennemies)
+            print(self.target)
