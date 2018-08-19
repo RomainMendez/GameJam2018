@@ -2,19 +2,30 @@ import pygame
 import visualmap
 
 class World():
-    def __init__(self,sprite_list,screen):
-        self.all_Sprite=sprite_list
-        self.actual_map=visualmap.Map(self.all_Sprite,screen)
+    def __init__(self,sprite_list,screen, player):
+        self.actual_map=visualmap.Map(sprite_list,screen)
+        self.gameOver = False
+        self.player = player
 
     def update(self):
-        for sprite in self.all_Sprite:
+        for sprite in self.actual_map.playlist:
             sprite.update()
-        #self.all_Sprite.update()
+        for sprite in self.actual_map.ennemy_playlist:
+            sprite.update()
+        
+        #Checking collision with ennemies
+        hit_list = pygame.sprite.spritecollide(self.player, self.actual_map.ennemy_playlist, True)
+        if len(hit_list):
+            self.gameOver = True
+
+        print(self.gameOver)
 
     def add_sprite(self, s):
-        self.all_Sprite.append(s)
         self.actual_map.all_list.append(s)
         self.actual_map.refresh()
+
+    def add_ennemy(self, ennemy):
+        self.actual_map.add_ennemy(ennemy)
 
 
 

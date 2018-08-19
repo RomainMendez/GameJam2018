@@ -37,21 +37,27 @@ screen = pygame.display.set_mode([Constants.SCREEN_WIDTH(), Constants.SCREEN_HEI
 clock = pygame.time.Clock()
 
 from staticScreens import HomeScreen
+from staticScreens import GameOver
 #Loading homescreen
 
 homescreen = HomeScreen()
 homescreen_group = pygame.sprite.Group()
 homescreen_group.add(homescreen)
 
+#For gameOver
+gameover = GameOver()
+gameover_group = pygame.sprite.Group()
+gameover_group.add(gameover)
+
 ### Setting up all entities for level
-player = Player(Ship(max_speed=5, cargo=3, acceleration=0.4, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
+player = Player(Ship(max_speed=5, cargo=3, acceleration=0.1, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
     nb_pop=0, money=0)
 
 #Data for generating ennemies
-tick = 6000
-count_towards_new_ennemy = 5940
+tick = 600
+count_towards_new_ennemy = 540
 
-world = World([MapImage(), player], screen)
+world = World([MapImage(), player], screen, player)
 
 starting_harbour1 = StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player)
 all_starting_harbours = [starting_harbour1]
@@ -75,6 +81,8 @@ while not done:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 menu = False
+                if(world.gameOver):
+                    menu = True
             if event.key == pygame.K_ESCAPE:
                 menu = True   
 
@@ -99,6 +107,9 @@ while not done:
     if(menu):
         homescreen_group.draw(screen)
         pygame.display.flip()
+    elif(world.gameOver):
+        gameover_group.draw(screen)
+        pygame.display.flip()
     else:
         
 
@@ -112,8 +123,9 @@ while not done:
             count_towards_new_ennemy = 0
             x_coeff = random.randint(-100, 100)/100
             y_coeff = random.randint(-100, 100)/100
-            ennemy = BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=500, y=100, x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player)
-            world.add_sprite(ennemy)
+            world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=500, y=100, 
+                x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player))
+            
             print("Ennemy spawned")
 
         world.update()
