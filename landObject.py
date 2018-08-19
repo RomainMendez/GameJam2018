@@ -1,6 +1,5 @@
 import pygame
 import worldObject
-#import navalObject
 class LandObject(worldObject.WorldObject):
     def __init__(self, x, y, player):
         # Call the parent's constructor

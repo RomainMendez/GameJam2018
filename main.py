@@ -17,6 +17,7 @@ from ship import Ship
 
 #for land tile objects
 from landObject import LandObject, StartingHarbour, EndingHarbour
+from buyZone import BuyZone
 
 #Method called needed by pygame
 pygame.init()
@@ -51,7 +52,7 @@ gameover_group.add(gameover)
 
 ### Setting up all entities for level
 player = Player(Ship(max_speed=5, cargo=3, acceleration=0.1, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
-    nb_pop=0, money=0)
+    nb_pop=0, money=50)
 
 #Data for generating ennemies
 tick = 600
@@ -65,6 +66,8 @@ all_starting_harbours = [starting_harbour1]
 world.add_sprite(starting_harbour1)
 world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
 
+buy_zone = BuyZone(500,500,'max_speed',player)
+world.add_sprite(buy_zone)
 
 menu = True
 done = False
