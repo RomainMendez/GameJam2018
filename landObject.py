@@ -1,6 +1,6 @@
 import pygame
 import worldObject
-import navalObject
+#import navalObject
 class LandObject(worldObject.WorldObject):
     def __init__(self, x, y, player):
         # Call the parent's constructor
@@ -15,12 +15,6 @@ class LandObject(worldObject.WorldObject):
             self.occupied=True
         else:
             self.occupied=False
-
-
-class BuyZone(LandObject):
-    def __init__(self,x,y,buyType,timer,player):
-        super().__init__(x,y,player)
-        self.buyType=buyType
 
 
 
