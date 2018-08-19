@@ -10,8 +10,7 @@ class BasicEnnemy(navalObject.NavalObject):
     def __init__(self, ship, speed_x, speed_y, x, y, x_coeff, y_coeff, nb_tick, player):
         super().__init__(ship, speed_x, speed_y, x,y)
         #Keeping old coordinates
-        self.image = pygame.transform.scale(self.image, (28, 28)) #Transforming the size of the ennemy
-        #Correcting hitbox
+        self.image = pygame.image.load("ressources/redsquare.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
