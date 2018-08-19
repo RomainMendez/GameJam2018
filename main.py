@@ -1,5 +1,7 @@
 #Useful imports
 import pygame
+import math
+
 
 import Constants
 
@@ -46,7 +48,11 @@ clock = pygame.time.Clock()
 
 from staticScreens import HomeScreen
 from staticScreens import GameOver
+from staticScreens import LowerBar
 #Loading homescreen
+bar = LowerBar()
+bar_group = pygame.sprite.Group()
+bar_group.add(bar)
 
 homescreen = HomeScreen()
 homescreen_group = pygame.sprite.Group()
@@ -83,6 +89,29 @@ def reset_world():
 
 menu = True
 done = False
+
+#Handling of score
+score = 0
+
+def display_bar(screen):
+    bar_group.draw(screen)
+    textsurface = myfont.render(str(player.money), False, (0, 0, 0)) #Shows player money
+    textsurface2 = myfont.render(str(player.nb_missil), False, (0, 0, 0)) #Shows player missiles
+    textsurface3 = myfont.render(str(score), False, (0, 0, 0)) #for score
+
+    speed = math.sqrt(world.player.speed_x*world.player.speed_x + world.player.speed_y*world.player.speed_y)
+    textsurface4 = myfont.render("{:2.2f}".format(speed), False, (0, 0, 0)) #for speed
+
+    nb_passenger = world.player.nb_pop
+    textsurface5 = myfont.render(str(nb_passenger), False, (0, 0, 0)) #for speed
+
+        
+    screen.blit(textsurface5, (741,659))
+    screen.blit(textsurface4, (921,659))
+    screen.blit(textsurface3, (120,659)) #coordinates x, y
+    screen.blit(textsurface, (430,659)) #coordinates x, y
+    screen.blit(textsurface2,(1255,659)) #coordinates x, y
+
 
 while not done:
     player = world.player
@@ -158,11 +187,8 @@ while not done:
         for harbour in world.starting_harbours:
             nb_avaiable = myfont.render(str(harbour.pop), False, (0, 0, 0))
             screen.blit(nb_avaiable,(harbour.rect.x, harbour.rect.y - 50))
-        
-        textsurface = myfont.render(str(player.money), False, (0, 0, 0)) #Shows player money
-        textsurface2 = myfont.render(str(player.nb_missil), False, (0, 0, 0)) #Shows player missiles
-        screen.blit(textsurface,(0,0)) #coordinates x, y
-        screen.blit(textsurface2,(50,0)) #coordinates x, y
+        score = world.player.score
+        display_bar(screen)
         pygame.display.flip()
 
     #Capping fps

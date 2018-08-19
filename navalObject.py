@@ -58,6 +58,7 @@ class Player(NavalObject):
 
         #Counting the money
         self.money = money
+        self.score = 0
 
         #Counting missiles
         self.nb_missil=nb_missil

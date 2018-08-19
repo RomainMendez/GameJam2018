@@ -63,6 +63,7 @@ class EndingHarbour(LandObject):
         to_unload = self.player.nb_pop
         self.player.nb_pop = 0
         self.player.money += to_unload*self.money
+        self.player.score += to_unload
         print(self.player.money)
 
 
