@@ -78,6 +78,7 @@ class Projectile(navalObject.NavalObject):
         self.rect.y = y
         self.target = closest_ennemy(player, ennemy_sprite_group)
         self.player = player
+        self.exploded = False
 
 
         
@@ -85,6 +86,8 @@ class Projectile(navalObject.NavalObject):
     
     def update(self):
         if self.target != None: #checks if target exists
+            if euclidian_distance(self.target.rect.x, self.target.rect.y, self.rect.x, self.rect.y) < 40:
+                self.exploded = True
             if self.rect.x < self.target.rect.x:
                 # Needs to accelerate on x-axis
                 self.add_speed_x(self.ship.acceleration)
