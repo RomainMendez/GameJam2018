@@ -55,6 +55,18 @@ class BasicEnnemy(navalObject.NavalObject):
         self.object_advance()
 
 
+def closest_ennemy(player,all_ennemy):
+    range=10000000000000000
+    res = None
+    for sprite in all_ennemy:
+        x = player.rect.x
+        y = player.rect.y
+        range0 = euclidian_distance(sprite.rect.x,sprite.rect.y, x, y)
+        if range0 <range:
+            range=range0
+            res=sprite
+
+    return res
 
         
 class Projectile(navalObject.NavalObject):
@@ -64,25 +76,14 @@ class Projectile(navalObject.NavalObject):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.target = self.closest_ennemy(ennemy_sprite_group)
-        self.player=player
+        self.target = closest_ennemy(player, ennemy_sprite_group)
+        self.player = player
 
 
-    def closest_ennemy(self,all_ennemy):
-        range=1024
-        res = None
-        for sprite in all_ennemy:
-            range0 = euclidian_distance(sprite.rect.x,sprite.rect.y,self.player.rect.x,self.player.y)
-            if range0 <range:
-                range=range0
-                res=sprite
-
-        return res
         
 
     
     def update(self):
-
         if self.target != None: #checks if target exists
             if self.rect.x < self.target.rect.x:
                 # Needs to accelerate on x-axis

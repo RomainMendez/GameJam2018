@@ -1,6 +1,6 @@
 import pygame
 import visualmap
-import projectile
+import basicEnnemy
 
 class World():
     def __init__(self,sprite_list,screen, player):
@@ -16,8 +16,9 @@ class World():
         self.shooted=True
 
     def update(self):
-        #if self.shooted:
-        #    self.actual_map.playlist.add(projectile.Projectile())
+        if self.shooted:
+            self.actual_map.playlist.add(basicEnnemy.Projectile(0, 0, self.player.rect.x, self.player.rect.y, self.player, self.actual_map.ennemy_playlist))
+            self.shooted = False
         for sprite in self.actual_map.playlist:
             sprite.update()
         for sprite in self.actual_map.ennemy_playlist:
