@@ -21,14 +21,18 @@ class BasicEnnemy(navalObject.NavalObject):
         self.nb_tick = nb_tick
         self.target = player
         self.chasing = False
+
+        #local constants
+        self.detection_range=Constants.BASIC_ENNEMY_DETECTION_RANGE()
+        self.losing_range=Constants.BASIC_ENNEMY_LOSING_RANGE()
     
 
     def update(self):
         distance = euclidian_distance(self.rect.x, self.rect.y, self.target.rect.x, self.target.rect.y)
-        if distance < Constants.BASIC_ENNEMY_DETECTION_RANGE():
+        if distance < self.detection_range:
             self.chasing = True
         else:
-            if distance > Constants.BASIC_ENNEMY_LOSING_RANGE():
+            if distance > self.losing_range:
                 self.chasing = False
 
         if self.chasing: #i.e chasing the player
