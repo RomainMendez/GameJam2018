@@ -50,26 +50,31 @@ gameover_group = pygame.sprite.Group()
 gameover_group.add(gameover)
 
 ### Setting up all entities for level
-player = Player(Ship(max_speed=5, cargo=3, acceleration=0.1, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
-    nb_pop=0, money=0)
 
 #Data for generating ennemies
-tick = 600
-count_towards_new_ennemy = 540
+tick = Constants.SPAWN_RATE()
+count_towards_new_ennemy = Constants.STARTING_COUNT()
 
-world = World([MapImage(), player], screen, player)
 
-starting_harbour1 = StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player)
-all_starting_harbours = [starting_harbour1]
+def create_standard_world():
+    player = Player(Ship(max_speed=5, cargo=3, acceleration=1, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
+        nb_pop=0, money=0)
+    w = World([MapImage(), player], screen, player)
+    w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player))
+    w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
+    return w
 
-world.add_sprite(starting_harbour1)
-world.add_sprite(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
+world = create_standard_world()
+
+def reset_world():
+    return create_standard_world(), Constants.SPAWN_RATE(), Constants.STARTING_COUNT()
 
 
 menu = True
 done = False
 
 while not done:
+    player = world.player
 
     #Spawning new ennemies
     
@@ -83,6 +88,8 @@ while not done:
                 menu = False
                 if(world.gameOver):
                     menu = True
+                    world, tick, count_towards_new_ennemy = reset_world()
+                print(world.gameOver)
             if event.key == pygame.K_ESCAPE:
                 menu = True   
 
@@ -125,8 +132,6 @@ while not done:
             y_coeff = random.randint(-100, 100)/100
             world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=500, y=100, 
                 x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player))
-            
-            print("Ennemy spawned")
 
         world.update()
         world.actual_map.show()
@@ -134,7 +139,7 @@ while not done:
         #Showing important informations
 
         #render amount of migrants available
-        for harbour in all_starting_harbours:
+        for harbour in world.starting_harbours:
             nb_avaiable = myfont.render(str(harbour.pop), False, (0, 0, 0))
             screen.blit(nb_avaiable,(harbour.rect.x, harbour.rect.y - 50))
         

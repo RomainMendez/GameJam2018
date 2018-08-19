@@ -24,3 +24,10 @@ def BASIC_ENNEMY_LOSING_RANGE():
 
 def TWO():
     return 2
+
+
+def STARTING_COUNT():
+    return 540
+
+def SPAWN_RATE():
+    return 600
