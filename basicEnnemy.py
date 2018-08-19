@@ -25,7 +25,6 @@ class BasicEnnemy(navalObject.NavalObject):
 
     def update(self):
         distance = euclidian_distance(self.rect.x, self.rect.y, self.target.rect.x, self.target.rect.y)
-        self.object_advance()
         if distance < Constants.BASIC_ENNEMY_DETECTION_RANGE():
             self.chasing = True
         else:
@@ -49,3 +48,4 @@ class BasicEnnemy(navalObject.NavalObject):
                 self.y_coeff = -self.y_coeff
             self.add_speed_x(self.ship.acceleration*self.x_coeff)
             self.add_speed_y(self.ship.acceleration*self.y_coeff)
+        self.object_advance()
