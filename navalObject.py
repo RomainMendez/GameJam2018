@@ -53,7 +53,7 @@ class Player(NavalObject):
 
         #Changing the size of the player
         self.image = pygame.image.load("ressources/bluesquare.png")
-        self.image = pygame.transform.scale(self.image, (16, 16))
+        #self.image = pygame.transform.scale(self.image, (16, 16))
         self.rect = self.image.get_rect()
 
         #Counting the money
