@@ -49,6 +49,8 @@ clock = pygame.time.Clock()
 from staticScreens import HomeScreen
 from staticScreens import GameOver
 from staticScreens import LowerBar
+from staticScreens import NextEnnemy
+
 #Loading homescreen
 bar = LowerBar()
 bar_group = pygame.sprite.Group()
@@ -112,6 +114,15 @@ def display_bar(screen):
     screen.blit(textsurface, (430,659)) #coordinates x, y
     screen.blit(textsurface2,(1255,659)) #coordinates x, y
 
+#showing where they'll spawn
+x_rand=random.randint(300, 900)
+y_rand=random.randint(10, 550)
+
+marker = NextEnnemy()
+marker_group = pygame.sprite.Group()
+marker_group.add(marker)
+marker.rect.x = x_rand
+marker.rect.y = y_rand
 
 while not done:
     player = world.player
@@ -175,8 +186,12 @@ while not done:
             count_towards_new_ennemy = 0
             x_coeff = random.randint(-100, 100)/100
             y_coeff = random.randint(-100, 100)/100
-            world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0, x=random.randint(300, 900), y=random.randint(10, 550), 
+            world.add_ennemy(BasicEnnemy(ship=Ship(1,0.1,0.1,0.1), speed_x=0, speed_y=0,x=x_rand,y=y_rand, 
                 x_coeff=x_coeff, y_coeff=y_coeff, nb_tick=0, player=player))
+            x_rand=random.randint(300, 900)
+            y_rand=random.randint(10, 550)
+            marker.rect.x = x_rand
+            marker.rect.y = y_rand
 
         world.update()
         world.actual_map.show()
@@ -189,6 +204,8 @@ while not done:
             screen.blit(nb_avaiable,(harbour.rect.x, harbour.rect.y - 50))
         score = world.player.score
         display_bar(screen)
+
+        marker_group.draw(screen)
         pygame.display.flip()
 
     #Capping fps
