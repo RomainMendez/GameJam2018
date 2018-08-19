@@ -34,7 +34,8 @@ textsurface = myfont.render('Some Text', False, (0, 0, 0)) #rgba colors
 
 #Sound theme
 pygame.mixer.music.load('ressources/theme.mp3')
-pygame.mixer.music.play()
+pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.pause()
 
 #Setting up window size
 
@@ -95,11 +96,14 @@ while not done:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 menu = False
+                pygame.mixer.music.unpause()
                 if(world.gameOver):
+                    pygame.mixer.music.pause()
                     menu = True
                     world, tick, count_towards_new_ennemy = reset_world()
                 print(world.gameOver)
             if event.key == pygame.K_ESCAPE:
+                pygame.mixer.music.pause()
                 menu = True   
 
             if event.key in [pygame.K_a, pygame.K_q]:
