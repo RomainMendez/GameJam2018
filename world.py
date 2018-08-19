@@ -7,6 +7,9 @@ class World():
         self.gameOver = False
         self.player = player
 
+        #Keeping track of starting harbours
+        self.starting_harbours = []
+
     def update(self):
         for sprite in self.actual_map.playlist:
             sprite.update()
@@ -26,6 +29,15 @@ class World():
 
     def add_ennemy(self, ennemy):
         self.actual_map.add_ennemy(ennemy)
+
+    def add_starting_harbour(self, h):
+        self.starting_harbours.append(h)
+        self.actual_map.all_list.append(h)
+        self.actual_map.refresh()
+
+    def add_ending_harbour(self, h):
+        self.actual_map.all_list.append(h)
+        self.actual_map.refresh()
 
 
 
