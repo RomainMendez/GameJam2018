@@ -17,7 +17,7 @@ from ship import Ship
 
 #for land tile objects
 from landObject import LandObject, StartingHarbour, EndingHarbour
-from buyZone import BuyCargo,BuySpeed
+from buyZone import BuyCargo,BuySpeed, BuyMissile
 
 #Method called needed by pygame
 pygame.init()
@@ -66,12 +66,13 @@ count_towards_new_ennemy = Constants.STARTING_COUNT()
 
 def create_standard_world():
     player = Player(Ship(max_speed=5, cargo=3, acceleration=1, decceleration=3), speed_x=0, speed_y=0, x=10, y=360, 
-        nb_pop=0, money=0)
+        nb_pop=0, money=0, nb_missil=1)
     w = World([MapImage(), player], screen, player)
     w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-30,100,25,1,player))
     w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-30,500,3,player))
     w.add_sprite(BuySpeed(500,500,player))
     w.add_sprite(BuyCargo(500,580,player))
+    w.add_sprite(BuyMissile(500,420,player))
     return w
 
 world = create_standard_world()
@@ -114,6 +115,8 @@ while not done:
                 player.bottom = True
             if event.key in [pygame.K_d]:
                 player.right = True
+            if event.key in [pygame.K_e]:
+                world.shoot()
         if event.type == pygame.KEYUP:
             if event.key in [pygame.K_a, pygame.K_q]:
                 player.left = False
@@ -157,7 +160,9 @@ while not done:
             screen.blit(nb_avaiable,(harbour.rect.x, harbour.rect.y - 50))
         
         textsurface = myfont.render(str(player.money), False, (0, 0, 0)) #Shows player money
+        textsurface2 = myfont.render(str(player.nb_missil), False, (0, 0, 0)) #Shows player missiles
         screen.blit(textsurface,(0,0)) #coordinates x, y
+        screen.blit(textsurface2,(50,0)) #coordinates x, y
         pygame.display.flip()
 
     #Capping fps

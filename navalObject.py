@@ -48,7 +48,7 @@ class NavalObject(worldObject.WorldObject):
         self.ship = ship
 
 class Player(NavalObject):
-    def __init__(self, ship, speed_x, speed_y, x, y, nb_pop, money):
+    def __init__(self, ship, speed_x, speed_y, x, y, nb_pop, money, nb_missil):
         super().__init__(ship, speed_x, speed_y, x, y)
 
         #Changing the size of the player
@@ -58,6 +58,9 @@ class Player(NavalObject):
 
         #Counting the money
         self.money = money
+
+        #Counting missiles
+        self.nb_missil=nb_missil
 
         self.nb_pop = nb_pop
         self.left = False

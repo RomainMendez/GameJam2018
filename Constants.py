@@ -22,6 +22,7 @@ def BASIC_ENNEMY_DETECTION_RANGE():
 def BASIC_ENNEMY_LOSING_RANGE():
     return 200*200
 
+
 def TWO():
     return 2
 
