@@ -31,4 +31,4 @@ def STARTING_COUNT():
     return 40
 
 def SPAWN_RATE():
-    return 60
+    return 120
