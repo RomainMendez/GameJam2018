@@ -57,7 +57,7 @@ class Player(NavalObject):
         self.rect = self.image.get_rect()
 
         #Counting the money
-        self.money = 0
+        self.money = money
 
         self.nb_pop = nb_pop
         self.left = False

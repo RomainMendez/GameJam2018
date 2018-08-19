@@ -17,6 +17,7 @@ from ship import Ship
 
 #for land tile objects
 from landObject import LandObject, StartingHarbour, EndingHarbour
+from buyZone import BuyZone
 
 #Method called needed by pygame
 pygame.init()
@@ -72,6 +73,8 @@ def create_standard_world():
 
 world = create_standard_world()
 
+buy_zone = BuyZone(500,500,'max_speed',player)
+world.add_sprite(buy_zone)
 def reset_world():
     return create_standard_world(), Constants.SPAWN_RATE(), Constants.STARTING_COUNT()
 
