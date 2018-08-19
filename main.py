@@ -24,10 +24,16 @@ pygame.key.set_repeat()
 
 pygame.font.init()
 
+pygame.mixer.init()
+
 
                    # if you want to use this module.
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
 textsurface = myfont.render('Some Text', False, (0, 0, 0)) #rgba colors
+
+#Sound theme
+pygame.mixer.music.load('ressources/theme.mp3')
+pygame.mixer.music.play()
 
 #Setting up window size
 
