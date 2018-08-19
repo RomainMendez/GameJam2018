@@ -51,6 +51,9 @@ class EndingHarbour(LandObject):
         super().__init__(x,y,player)
         self.money=money
         self.image = pygame.image.load("ressources/purplesquare.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
     #update
     def update(self):

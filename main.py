@@ -75,10 +75,13 @@ def create_standard_world():
         nb_pop=0, money=0, nb_missil=1)
     w = World([MapImage(), player], screen, player)
     w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-10,100,25,1,player))
-    w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-50,500,3,player))
-    w.add_sprite(BuySpeed(500,500,player))
-    w.add_sprite(BuyCargo(500,580,player))
-    w.add_sprite(BuyMissile(500,420,player))
+    w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-2,200,12,2,player))
+    w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-5,600,5,3,player))
+    w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-50,180,3,player))
+    w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-55,500,3,player))
+    w.add_sprite(BuySpeed(800,500,player))
+    w.add_sprite(BuyCargo(654,300,player))
+    w.add_sprite(BuyMissile(200,200,player))
     return w
 
 world = create_standard_world()
