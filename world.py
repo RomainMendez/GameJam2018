@@ -25,8 +25,8 @@ class World():
         for sprite in self.actual_map.missile_playlist:
             sprite.update()
             if sprite.exploded == True: #missile hit
-                hit_list = pygame.sprite.spritecollide(sprite, self.actual_map.ennemy_playlist, True)
-                print(hit_list)
+                #hit_list = pygame.sprite.spritecollide(sprite, self.actual_map.ennemy_playlist, True)
+                #print(hit_list)
                 to_delete.append(sprite)
         for element in to_delete:
             self.actual_map.missile_playlist.remove(element)

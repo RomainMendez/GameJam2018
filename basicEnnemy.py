@@ -77,6 +77,7 @@ class Projectile(navalObject.NavalObject):
         self.rect.x = x
         self.rect.y = y
         self.target = closest_ennemy(player, ennemy_sprite_group)
+        self.all_ennemies = ennemy_sprite_group
         self.player = player
         self.exploded = False
         self.invert = False
@@ -94,7 +95,7 @@ class Projectile(navalObject.NavalObject):
             self.image = pygame.transform.rotate(self.image, 180)
 
         if self.target != None: #checks if target exists
-            if euclidian_distance(self.target.rect.center[0], self.target.rect.center[1], self.rect.center[0], self.rect.center[1]) < 40:
+            if len(pygame.sprite.spritecollide(self, self.all_ennemies, True)) !=0:
                 self.exploded = True
             if self.rect.center[0] < self.target.rect.center[0] :
                 # Needs to accelerate on x-axis
