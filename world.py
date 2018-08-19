@@ -1,16 +1,23 @@
 import pygame
 import visualmap
+import projectile
 
 class World():
     def __init__(self,sprite_list,screen, player):
         self.actual_map=visualmap.Map(sprite_list,screen)
         self.gameOver = False
         self.player = player
+        self.shooted=False
 
         #Keeping track of starting harbours
         self.starting_harbours = []
 
+    def shoot(self):
+        self.shooted=True
+
     def update(self):
+        #if self.shooted:
+        #    self.actual_map.playlist.add(projectile.Projectile())
         for sprite in self.actual_map.playlist:
             sprite.update()
         for sprite in self.actual_map.ennemy_playlist:

@@ -1,10 +1,11 @@
 import pygame
 import basicEnnemy
 import Constants
+import ship
 
 class Projectile(basicEnnemy.BasicEnnemy):
-    def __init__(self, ship, speed_x, speed_y, x, y, player,ennemy_sprite_group):
-        super().__init__(ship, speed_x, speed_y, x,y,0,0,0,player)
+    def __init__(self, speed_x, speed_y, x, y, player,ennemy_sprite_group):
+        super().__init__(ship.Ship(), speed_x, speed_y, x,y,0,0,0,player)
         self.image = pygame.image.load("ressources/missile.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
