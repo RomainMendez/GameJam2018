@@ -78,7 +78,7 @@ def create_standard_world():
     w = World([MapImage(), player], screen, player)
     w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-10,100,25,1,player))
     w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-2,200,12,2,player))
-    w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-5,600,5,3,player))
+    w.add_starting_harbour(StartingHarbour(Constants.COAST_OFFSET()-5,560,5,3,player))
     w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-50,180,3,player))
     w.add_ending_harbour(EndingHarbour(Constants.SCREEN_WIDTH()-Constants.COAST_OFFSET()-55,500,3,player))
     w.add_sprite(BuySpeed(800,500,player))
